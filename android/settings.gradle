@@ -1,0 +1,3 @@
+rootProject.name = 'single_instagram_front'
+
+include ':app'
