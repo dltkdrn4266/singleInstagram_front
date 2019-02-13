@@ -1,7 +1,9 @@
 # OSX
 #
 .DS_Store
-
+# Jest
+#
+.jest/
 # Xcode
 #
 build/
