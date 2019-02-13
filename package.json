@@ -7,10 +7,18 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-native-vector-icons": "^4.6.4",
+    "axios": "^0.18.0",
     "react": "16.6.3",
-    "react-native": "0.58.4"
+    "react-native": "^0.58.4",
+    "react-native-vector-icons": "^6.2.0",
+    "rnpm": "^1.9.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.3",
+    "@types/react": "^16.8.2",
+    "@types/react-native": "^0.57.35",
+    "@types/react-test-renderer": "^16.8.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.1.0",
     "jest": "24.1.0",
@@ -18,6 +26,26 @@
     "react-test-renderer": "16.6.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
