@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView} from "react-native";
+import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Alert} from "react-native";
 import {IconButton} from "./IconButton";
 
 export default class PostItem extends Component{
@@ -17,7 +17,18 @@ export default class PostItem extends Component{
     };
 
     private onPressDeleteButton = () => {
-        console.log('press Delete');
+        Alert.alert(
+            '삭제',
+            '해당 글을 삭제하시겠습니까?',
+            [
+                {   
+                    text: '취소',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                {text: '확인', onPress: () => console.log('OK Pressed')},
+            ]
+        );
     }
 
 
