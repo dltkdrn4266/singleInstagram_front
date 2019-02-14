@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {View,StyleSheet,Text,Image} from "react-native";
+import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView} from "react-native";
 import {IconButton} from "./IconButton";
 
 export default class PostItem extends Component{
@@ -8,18 +8,33 @@ export default class PostItem extends Component{
         console.log('press Profile');
     };
 
+    private onPressHeartButton = () => {
+        console.log('press Heart');
+    };
+
+    private onPressCommentButton = () => {
+        console.log('press Comment');
+    };
+
+    private onPressDeleteButton = () => {
+        console.log('press Delete');
+    }
+
+
     public render(){
         return(
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.title}>
-                    <IconButton onPress={this.onPressProfileButton} style={styles.profile} iconName={"chevron-right"} iconSize={30} iconColor={"#01a699"}/>
-                    <Text style={styles.textName}>   이름이름이름이름이름</Text>
+                    <TouchableOpacity style={styles.profile} onPress={this.onPressProfileButton}></TouchableOpacity>
+                    <Text style={styles.textName}>   dltkdrn4266</Text>
                 </View>
                 <Image style={{width: '100%', height: 400}} source={{uri: 'http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg'}}/>
-                <View>
-
+                <View style={styles.iconView}>
+                    <IconButton onPress={this.onPressHeartButton} style={styles.iconHeart} iconName={'heart-o'} iconSize={24} iconColor={'black'}/>
+                    <IconButton onPress={this.onPressCommentButton} style={styles.iconComment} iconName={'comment-o'} iconSize={24} iconColor={'black'}/>
+                    <IconButton onPress={this.onPressDeleteButton} style={styles.iconComment} iconName={'trash-o'} iconSize={25} iconColor={'black'}/>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -52,5 +67,15 @@ const styles = StyleSheet.create({
         height: 30,
         backgroundColor:'#fff',
         borderRadius:100,
+    },
+    iconView: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    iconHeart: {
+        padding: 8,
+    },
+    iconComment: {
+        padding: 6,
     }
 })
