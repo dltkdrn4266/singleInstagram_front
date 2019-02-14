@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleProp, TextStyle, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { IStoreInjectedProps } from '../stores/rootStore';
 
 interface IProps extends IStoreInjectedProps {
