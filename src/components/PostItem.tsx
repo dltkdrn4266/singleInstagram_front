@@ -2,8 +2,14 @@ import React from 'react';
 import {Component} from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Alert} from "react-native";
 import {IconButton} from "./IconButton";
+import {IPostSerializer} from "../models";
+import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 
-export default class PostItem extends Component{
+interface IProps extends IStoreInjectedProps{
+    post: IPostSerializer;
+}
+
+export default class PostItem extends Component <IProps,{}> {
     private onPressProfileButton = () => {
         console.log('press Profile');
     };
@@ -23,29 +29,44 @@ export default class PostItem extends Component{
             [
                 {   
                     text: '취소',
-                    onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
-                {text: '확인', onPress: () => console.log('OK Pressed')},
+                {text: '확인', onPress: this.deletePost}
             ]
         );
+    };
+
+    private deletePost = async() => {
+        try{
+            const response = await this.props[STORE_NAME]!.axiosStore.delete('/instagram/posts/');
+        }catch (error) {
+            console.log(error);
+        }
     }
 
 
     public render(){
+        console.log(this.props.post.photos);
+        console.log(this.props.post.id);
         return(
-            <ScrollView style={styles.container}>
+            <View style={styles.container}>
                 <View style={styles.title}>
                     <TouchableOpacity style={styles.profile} onPress={this.onPressProfileButton}></TouchableOpacity>
-                    <Text style={styles.textName}>   dltkdrn4266</Text>
+                    <Text style={styles.textName}>{this.props.post.user.username}</Text>
                 </View>
-                <Image style={{width: '100%', height: 400}} source={{uri: 'http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg'}}/>
+                <Image style={{width: '100%', height: 400}} source={{uri: this.props.post.photos}}/>
                 <View style={styles.iconView}>
                     <IconButton onPress={this.onPressHeartButton} style={styles.iconHeart} iconName={'heart-o'} iconSize={24} iconColor={'black'}/>
                     <IconButton onPress={this.onPressCommentButton} style={styles.iconComment} iconName={'comment-o'} iconSize={24} iconColor={'black'}/>
                     <IconButton onPress={this.onPressDeleteButton} style={styles.iconComment} iconName={'trash-o'} iconSize={25} iconColor={'black'}/>
                 </View>
-            </ScrollView>
+                <View style={styles.contentView}>
+                    <Text style={styles.idText}>{this.props.post.user.username}</Text>
+                    <View style={styles.contentTextView}>
+                        <Text style={styles.contentText}>{this.props.post.content}</Text>
+                    </View>
+                </View>
+            </View>
         )
     }
 }
@@ -67,7 +88,8 @@ const styles = StyleSheet.create({
         padding: 10
     },
     textName: {
-        fontSize: 13
+        fontSize: 13,
+        padding: 10
     },
     profile: {
         borderWidth:1,
@@ -88,5 +110,22 @@ const styles = StyleSheet.create({
     },
     iconComment: {
         padding: 6,
+    },
+    contentView: {
+        flexDirection: 'row',
+    },
+    idText: {
+        marginLeft: 7,
+        fontFamily: 'NanumSquareB',
+        color: 'black',
+        fontSize: 14
+    },
+    contentTextView: {
+        alignItems: 'center'
+    },
+    contentText: {
+        marginLeft: 7,
+        fontSize: 14
     }
+
 })

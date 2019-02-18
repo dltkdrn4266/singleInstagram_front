@@ -1,5 +1,11 @@
 import Axios, {AxiosInstance} from "axios";
 import PostStore from "./postStore";
+import {configure} from "mobx";
+
+
+configure({
+    enforceActions: 'observed'
+});
 
 export default class RootStore {
     public axiosStore: AxiosInstance;
@@ -7,7 +13,7 @@ export default class RootStore {
 
     constructor(){
         this.axiosStore = Axios.create({
-            baseURL: 'http://localhost:8000/'
+            baseURL: 'http://sanggulee.pythonanywhere.com/'
         });
         this.postStore = new PostStore(this);
     }

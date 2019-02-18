@@ -1,18 +1,19 @@
 import React from 'react';
 import { Component } from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import {IconButton} from "../components/IconButton";
 import PostItem from "../components/PostItem";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
 import {IPostSerializer} from "../models";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
 }
 
 @inject(STORE_NAME)
+@observer
 export default class PostListScreen extends Component<IProps> {
 
     constructor(props: IProps){
@@ -29,10 +30,10 @@ export default class PostListScreen extends Component<IProps> {
                 }
             });
             console.log(response.data);
+            await this.props[STORE_NAME]!.postStore.setPostList(response.data);
+            console.log(this.props[STORE_NAME]!.postStore.postList);
         } catch (error) {
-            console.log('에러임에러임 ㅠㅠ');
             console.log(error);
-            // console.log(JSON.stringify(error, null, 2));
         }
     };
 
@@ -47,7 +48,11 @@ export default class PostListScreen extends Component<IProps> {
                     <IconButton onPress={this.onPressPhotoButton} style={styles.icon} iconName={'camera'} iconSize={25} iconColor={'black'}/>
                     <Text style={styles.titleText}>Instagram</Text>
                 </View>
-                <PostItem/>
+                <ScrollView>
+                {
+                    this.props[STORE_NAME]!.postStore.postList.map(post => <PostItem key={post.id} post={post}/>)
+                }
+                </ScrollView>
             </View>
         )
     }
