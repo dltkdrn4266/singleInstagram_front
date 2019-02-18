@@ -7,6 +7,7 @@ import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
 import {IPostSerializer} from "../models";
 import {inject, observer} from "mobx-react";
+import {ENV_CONSTANTS} from "../constants";
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
@@ -23,14 +24,13 @@ export default class PostListScreen extends Component<IProps> {
 
     private getPostList = async() => {
         try {
+            this.props[STORE_NAME]!.loadingStore.startLoading();
             const response = await this.props[STORE_NAME]!.axiosStore.get<IPostSerializer[]>('/instagram/posts/', {
-                auth: {
-                    "username": "sanggulee",
-                    "password": "l5254266"
-                }
+                auth: ENV_CONSTANTS.auth
             });
             console.log(response.data);
-            await this.props[STORE_NAME]!.postStore.setPostList(response.data);
+            this.props[STORE_NAME]!.postStore.setPostList(response.data);
+            this.props[STORE_NAME]!.loadingStore.endLoading();
             console.log(this.props[STORE_NAME]!.postStore.postList);
         } catch (error) {
             console.log(error);

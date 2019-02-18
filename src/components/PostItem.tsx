@@ -4,11 +4,14 @@ import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Alert} from
 import {IconButton} from "./IconButton";
 import {IPostSerializer} from "../models";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
+import {inject} from "mobx-react";
+import {ENV_CONSTANTS} from "../constants";
 
 interface IProps extends IStoreInjectedProps{
     post: IPostSerializer;
 }
 
+@inject(STORE_NAME)
 export default class PostItem extends Component <IProps,{}> {
     private onPressProfileButton = () => {
         console.log('press Profile');
@@ -38,7 +41,9 @@ export default class PostItem extends Component <IProps,{}> {
 
     private deletePost = async() => {
         try{
-            const response = await this.props[STORE_NAME]!.axiosStore.delete('/instagram/posts/');
+            await this.props[STORE_NAME]!.axiosStore.delete('/instagram/posts/' + this.props.post.id + '/',{
+                auth: ENV_CONSTANTS.auth
+            });
         }catch (error) {
             console.log(error);
         }
@@ -74,8 +79,6 @@ export default class PostItem extends Component <IProps,{}> {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        width: '100%',
-        height: '100%'
     },
     test: {
         borderWidth: 1
