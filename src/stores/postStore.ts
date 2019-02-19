@@ -1,6 +1,7 @@
-import RootStore from './rootStore';
+import RootStore, {STORE_NAME} from './rootStore';
 import {IPostSerializer} from "../models";
 import {action, observable} from "mobx";
+import {ENV_CONSTANTS} from "../constants";
 
 export default class postStore {
     private rootStore: RootStore;
@@ -15,4 +16,19 @@ export default class postStore {
     public setPostList = (data: IPostSerializer[]) => {
         this.postList = data;
     }
+
+    public getPostList = async() => {
+        try {
+            this.rootStore.loadingStore.startLoading();
+            const response = await this.rootStore.axiosStore.get<IPostSerializer[]>('/instagram/posts/', {
+                auth: ENV_CONSTANTS.auth
+            });
+            console.log(response.data);
+            this.rootStore.postStore.setPostList(response.data);
+            this.rootStore.loadingStore.endLoading();
+            console.log(this.rootStore.postStore.postList);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 }

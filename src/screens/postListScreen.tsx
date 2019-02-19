@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import {View, Text, StyleSheet, ScrollView} from "react-native";
+import {View, Text, StyleSheet, ScrollView, ActivityIndicator} from "react-native";
 import {IconButton} from "../components/IconButton";
 import PostItem from "../components/PostItem";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
@@ -19,40 +19,55 @@ export default class PostListScreen extends Component<IProps> {
 
     constructor(props: IProps){
         super(props);
-        this.getPostList();
-    };
-
-    private getPostList = async() => {
-        try {
-            this.props[STORE_NAME]!.loadingStore.startLoading();
-            const response = await this.props[STORE_NAME]!.axiosStore.get<IPostSerializer[]>('/instagram/posts/', {
-                auth: ENV_CONSTANTS.auth
-            });
-            console.log(response.data);
-            this.props[STORE_NAME]!.postStore.setPostList(response.data);
-            this.props[STORE_NAME]!.loadingStore.endLoading();
-            console.log(this.props[STORE_NAME]!.postStore.postList);
-        } catch (error) {
-            console.log(error);
-        }
+        this.props[STORE_NAME]!.postStore.getPostList();
     };
 
     private onPressPhotoButton = () => {
         this.props.navigation.navigate('Camera');
     };
 
+    private onPressWritingButton = () => {
+        this.props.navigation.navigate('Writing');
+    };
+
     public render(){
         return(
             <View style={styles.container}>
-                <View style={styles.title}>
-                    <IconButton onPress={this.onPressPhotoButton} style={styles.icon} iconName={'camera'} iconSize={25} iconColor={'black'}/>
-                    <Text style={styles.titleText}>Instagram</Text>
+                <View style={styles.header}>
+                    <View style={styles.title}>
+                        <IconButton
+                            onPress={this.onPressPhotoButton}
+                            style={styles.icon}
+                            iconName={'camera'}
+                            iconSize={25}
+                            iconColor={'black'}/>
+                        <Text style={styles.titleText}>Instagram</Text>
+                    </View>
+                    <View>
+                        <IconButton
+                            onPress={this.onPressWritingButton}
+                            style={styles.icon}
+                            iconName={'pencil'}
+                            iconSize={25}
+                            iconColor={'black'}/>
+                    </View>
                 </View>
-                <ScrollView>
-                {
-                    this.props[STORE_NAME]!.postStore.postList.map(post => <PostItem key={post.id} post={post}/>)
+                {this.props[STORE_NAME]!.loadingStore.isLoading ?
+                    <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
+                        <ActivityIndicator size={45} color="#0000ff" />
+                    </View> :
+                    <ScrollView>
+                        {
+                            this.props[STORE_NAME]!.postStore.postList.length > 0 ?
+                                this.props[STORE_NAME]!.postStore.postList.map(post =>
+                                    <PostItem key={post.id} post={post}/>
+                                ) :
+                                <View style={styles.noPostView}>
+                                    <Text>등록된 포스트가 없습니다.</Text>
+                                </View>
+                        }
+                    </ScrollView>
                 }
-                </ScrollView>
             </View>
         )
     }
@@ -65,12 +80,16 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    title: {
+    header: {
         flexDirection: 'row',
-        alignItems: 'center',
+        justifyContent: 'space-between',
         backgroundColor: 'white',
         height: 45,
         elevation: 5
+    },
+    title: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     titleText: {
         fontFamily: 'NanumSquareR',
@@ -78,5 +97,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         padding: 10
+    },
+    noPostView: {
+        alignItems: 'center'
     }
-})
+});
