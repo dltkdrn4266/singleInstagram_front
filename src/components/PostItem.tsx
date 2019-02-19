@@ -44,6 +44,7 @@ export default class PostItem extends Component <IProps,{}> {
             await this.props[STORE_NAME]!.axiosStore.delete('/instagram/posts/' + this.props.post.id + '/',{
                 auth: ENV_CONSTANTS.auth
             });
+            await this.props[STORE_NAME]!.postStore.getPostList();
         }catch (error) {
             console.log(error);
         }
@@ -51,8 +52,6 @@ export default class PostItem extends Component <IProps,{}> {
 
 
     public render(){
-        console.log(this.props.post.photos);
-        console.log(this.props.post.id);
         return(
             <View style={styles.container}>
                 <View style={styles.title}>
@@ -65,12 +64,17 @@ export default class PostItem extends Component <IProps,{}> {
                     <IconButton onPress={this.onPressCommentButton} style={styles.iconComment} iconName={'comment-o'} iconSize={24} iconColor={'black'}/>
                     <IconButton onPress={this.onPressDeleteButton} style={styles.iconComment} iconName={'trash-o'} iconSize={25} iconColor={'black'}/>
                 </View>
-                <View style={styles.contentView}>
-                    <Text style={styles.idText}>{this.props.post.user.username}</Text>
-                    <View style={styles.contentTextView}>
-                        <Text style={styles.contentText}>{this.props.post.content}</Text>
-                    </View>
-                </View>
+                    {
+                        this.props.post.content === '' ? null :
+                            <View style={styles.contentView}>
+                                <View style={styles.idTextView}>
+                                    <Text style={styles.idText}>{this.props.post.user.username}</Text>
+                                </View>
+                                <View style={styles.contentTextView}>
+                                    <Text style={styles.contentText}>{this.props.post.content}</Text>
+                                </View>
+                            </View>
+                    }
             </View>
         )
     }
@@ -117,17 +121,21 @@ const styles = StyleSheet.create({
     contentView: {
         flexDirection: 'row',
     },
+    idTextView: {
+        justifyContent: 'center',
+        marginLeft: 7
+    },
     idText: {
-        marginLeft: 7,
         fontFamily: 'NanumSquareB',
         color: 'black',
-        fontSize: 14
+        fontSize: 14,
     },
     contentTextView: {
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 7
     },
     contentText: {
-        marginLeft: 7,
         fontSize: 14
     }
 
