@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity, ScrollView, Alert} from "react-native";
+import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, ToastAndroid} from "react-native";
 import {IconButton} from "./IconButton";
 import {IPostSerializer} from "../models";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
@@ -44,6 +44,7 @@ export default class PostItem extends Component <IProps,{}> {
             await this.props[STORE_NAME]!.axiosStore.delete('/instagram/posts/' + this.props.post.id + '/',{
                 auth: ENV_CONSTANTS.auth
             });
+            ToastAndroid.show('포스트가 삭제되었습니다', ToastAndroid.BOTTOM);
             await this.props[STORE_NAME]!.postStore.getPostList();
         }catch (error) {
             console.log(error);
@@ -60,9 +61,27 @@ export default class PostItem extends Component <IProps,{}> {
                 </View>
                 <Image style={{width: '100%', height: 400}} source={{uri: this.props.post.photos}}/>
                 <View style={styles.iconView}>
-                    <IconButton onPress={this.onPressHeartButton} style={styles.iconHeart} iconName={'heart-o'} iconSize={24} iconColor={'black'}/>
-                    <IconButton onPress={this.onPressCommentButton} style={styles.iconComment} iconName={'comment-o'} iconSize={24} iconColor={'black'}/>
-                    <IconButton onPress={this.onPressDeleteButton} style={styles.iconComment} iconName={'trash-o'} iconSize={25} iconColor={'black'}/>
+                    <IconButton
+                        onPress={this.onPressHeartButton}
+                        style={styles.iconHeart}
+                        iconName={'heart-o'}
+                        iconSize={24}
+                        iconColor={'black'}
+                    />
+                    <IconButton
+                        onPress={this.onPressCommentButton}
+                        style={styles.iconComment}
+                        iconName={'comment-o'}
+                        iconSize={24}
+                        iconColor={'black'}
+                    />
+                    <IconButton
+                        onPress={this.onPressDeleteButton}
+                        style={styles.iconComment}
+                        iconName={'trash-o'}
+                        iconSize={25}
+                        iconColor={'black'}
+                    />
                 </View>
                     {
                         this.props.post.content === '' ? null :

@@ -4,7 +4,7 @@ export interface IPostSerializer {
     id: number,
     user: IUserSerializer,
     photos: string,
-    like: number,
+    like: boolean,
     content: string,
     created_at: string
 }

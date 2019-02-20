@@ -5,9 +5,7 @@ import {IconButton} from "../components/IconButton";
 import PostItem from "../components/PostItem";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
-import {IPostSerializer} from "../models";
 import {inject, observer} from "mobx-react";
-import {ENV_CONSTANTS} from "../constants";
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
