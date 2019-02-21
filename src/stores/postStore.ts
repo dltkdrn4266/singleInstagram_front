@@ -26,7 +26,6 @@ export default class postStore {
             console.log(response.data);
             this.rootStore.postStore.setPostList(response.data);
             this.rootStore.loadingStore.endLoading();
-            console.log(this.rootStore.postStore.postList);
         } catch (error) {
             console.log(error);
         }

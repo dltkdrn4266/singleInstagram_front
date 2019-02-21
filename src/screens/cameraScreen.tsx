@@ -51,15 +51,16 @@ export default class CameraScreen extends Component<IProps,{}> {
                 height: 1280,
                 cropping: true,
                 multiple: true,
+                includeBase64: true
             });
             const imageArray = images as Image[];
             if (imageArray.length > 0){
                 for(const image in imageArray){
                     const data = new FormData();
-                    const blob = new File([imageArray[image].data!],'test',{type: imageArray[image].mime});
-                    console.log('blob');
-                    console.log(blob);
-                    data.append('photos', blob);
+                    // const blob = new File([imageArray[image].data!],'test',{type: imageArray[image].mime});
+                    // console.log('blob');
+                    // console.log(blob);
+                    data.append('photos', imageArray[image].data!);
                     // data.append('photos', {
                     //     uri: imageArray[image].path,
                     //     type: imageArray[image].mime,
