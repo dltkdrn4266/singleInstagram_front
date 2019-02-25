@@ -41,14 +41,14 @@ export default class PostListScreen extends Component<IProps> {
                             iconColor={'black'}/>
                         <Text style={styles.titleText}>Instagram</Text>
                     </View>
-                    <View>
-                        <IconButton
-                            onPress={this.onPressWritingButton}
-                            style={styles.icon}
-                            iconName={'pencil'}
-                            iconSize={25}
-                            iconColor={'black'}/>
-                    </View>
+                    {/*<View>*/}
+                        {/*<IconButton*/}
+                            {/*onPress={this.onPressWritingButton}*/}
+                            {/*style={styles.icon}*/}
+                            {/*iconName={'pencil'}*/}
+                            {/*iconSize={25}*/}
+                            {/*iconColor={'black'}/>*/}
+                    {/*</View>*/}
                 </View>
                 {this.props[STORE_NAME]!.loadingStore.isLoading ?
                     <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
