@@ -9,6 +9,7 @@ import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
 import {NavigationScreenProp} from "react-navigation";
+import { Base64 } from 'js-base64';
 
 interface IProps extends IStoreInjectedProps{
     navigation: NavigationScreenProp<{}>;
@@ -49,7 +50,6 @@ export default class CameraScreen extends Component<IProps,{}> {
             const images = await ImagePicker.openPicker({
                 width: 960,
                 height: 1280,
-                cropping: true,
                 multiple: true,
                 includeBase64: true
             });
@@ -57,19 +57,13 @@ export default class CameraScreen extends Component<IProps,{}> {
             if (imageArray.length > 0){
                 for(const image in imageArray){
                     const data = new FormData();
-                    // data.append('content', 'test');
                     data.append('photos', imageArray[image].data!);
-                    // const response = await this.props[STORE_NAME]!.axiosStore.post('/instagram/posts/',{
-                    //     data
-                    // },{
-                    //     auth: ENV_CONSTANTS.auth
-                    // });
+                    const headers = new Headers();
+                    headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
                     const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
                         method: 'post',
                         body: data,
-                        headers: {
-                            'Authorization': ENV_CONSTANTS.auth
-                        }
+                        headers: headers
                     });
                     console.log(response);
                     await this.props[STORE_NAME]!.postStore.getPostList();
