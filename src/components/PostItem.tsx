@@ -6,6 +6,7 @@ import {IPostSerializer} from "../models";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
+import {PostTime} from "./PostTime";
 
 interface IProps extends IStoreInjectedProps{
     post: IPostSerializer;
@@ -94,6 +95,7 @@ export default class PostItem extends Component <IProps,{}> {
                                 </View>
                             </View>
                     }
+                    <PostTime time={this.props.post.created_at}/>
             </View>
         )
     }
@@ -129,7 +131,6 @@ const styles = StyleSheet.create({
     },
     iconView: {
         flexDirection: 'row',
-        alignItems: 'flex-start',
     },
     iconHeart: {
         padding: 8,
