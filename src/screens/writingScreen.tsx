@@ -1,15 +1,34 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity,Modal} from "react-native";
 import {IconButton} from "../components/IconButton";
 import {IStoreInjectedProps} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
+import ImageViewer from 'react-native-image-zoom-viewer';
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
 }
 
+interface IState {
+    base64Data: string,
+    modalVisible: boolean
+}
+
 export default class WritingScreen extends Component<IProps,{}> {
+    public readonly state: IState = {
+        base64Data: '',
+        modalVisible: false
+    };
+
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            base64Data: this.props.navigation.getParam('data'),
+            modalVisible: false
+        }
+    }
 
     private onPressBackButton = () => {
         this.props.navigation.goBack();
@@ -17,7 +36,11 @@ export default class WritingScreen extends Component<IProps,{}> {
 
     private onPressShareButton = () => {
         console.log('share press');
-    }
+    };
+
+    private onPressImageButton = () => {
+
+    };
 
     public render(){
         return(
@@ -37,10 +60,10 @@ export default class WritingScreen extends Component<IProps,{}> {
                   </TouchableOpacity>
               </View>
               <IconButton
-                  onPress={this.onPressShareButton}
+                  onPress={this.onPressImageButton}
                   style={styles.icon}
                   iconName={'picture-o'}
-                  iconSize={25}
+                  iconSize={40}
                   iconColor={'black'}/>
           </View>
         );

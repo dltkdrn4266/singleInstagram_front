@@ -56,19 +56,21 @@ export default class CameraScreen extends Component<IProps,{}> {
             const imageArray = images as Image[];
             if (imageArray.length > 0){
                 for(const image in imageArray){
+                    this.props.navigation.navigate('Writing',{
+                        data: imageArray[image].data
+                    });
                     const data = new FormData();
                     data.append('photos', imageArray[image].data!);
                     const headers = new Headers();
-                    headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
-                    const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
-                        method: 'post',
-                        body: data,
-                        headers: headers
-                    });
-                    console.log(response);
-                    await this.props[STORE_NAME]!.postStore.getPostList();
-                    this.props.navigation.goBack();
-                    ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);
+                    // headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
+                    // const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
+                    //     method: 'post',
+                    //     body: data,
+                    //     headers: headers
+                    // });
+                    // console.log(response);
+                    // await this.props[STORE_NAME]!.postStore.getPostList();
+                    // ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);
                 }
             }
         } catch (error) {
