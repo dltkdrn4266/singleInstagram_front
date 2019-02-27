@@ -15,8 +15,10 @@ export class PostTime extends Component<IProps> {
 
         if((tempDate.getFullYear() - 1970) > 0) {
             dateText = `${tempDate.getFullYear() - 1970}년 전`;
-        } else if((tempDate.getMonth() -1) >= 0) {
+        } else if((tempDate.getMonth() - 1)>= 0) {
             dateText = `${tempDate.getMonth() + 1}개월 전`
+        } else if((tempDate.getDate() - 1) > 0) {
+            dateText = `${tempDate.getHours() - 1}일 전`
         } else if((tempDate.getHours() - 9) > 0) {
             dateText = `${tempDate.getHours() - 9}시간 전`
         } else if(tempDate.getMinutes() == 0) {
