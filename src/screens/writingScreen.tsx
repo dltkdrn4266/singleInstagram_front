@@ -1,24 +1,30 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity,Modal} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, Modal, Image, TextInput, ToastAndroid} from "react-native";
 import {IconButton} from "../components/IconButton";
-import {IStoreInjectedProps} from "../stores/rootStore";
+import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
-import ImageViewer from 'react-native-image-zoom-viewer';
+import {ImageViewer} from "react-native-image-zoom-viewer";
+import {ENV_CONSTANTS} from "../constants";
+import {inject} from "mobx-react";
+import { Base64 } from 'js-base64';
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
 }
 
 interface IState {
-    base64Data: string,
-    modalVisible: boolean
+    base64Data: string;
+    modalVisible: boolean;
+    content: string;
 }
 
-export default class WritingScreen extends Component<IProps,{}> {
+@inject(STORE_NAME)
+export default class WritingScreen extends Component<IProps,IState> {
     public readonly state: IState = {
         base64Data: '',
-        modalVisible: false
+        modalVisible: false,
+        content: ''
     };
 
     constructor(props: IProps) {
@@ -26,7 +32,8 @@ export default class WritingScreen extends Component<IProps,{}> {
 
         this.state = {
             base64Data: this.props.navigation.getParam('data'),
-            modalVisible: false
+            modalVisible: false,
+            content: ''
         }
     }
 
@@ -34,13 +41,39 @@ export default class WritingScreen extends Component<IProps,{}> {
         this.props.navigation.goBack();
     };
 
-    private onPressShareButton = () => {
-        console.log('share press');
+    private onPressShareButton = async() => {
+        const data = new FormData();
+        data.append('photos', this.state.base64Data);
+        data.append('content', this.state.content);
+        const headers = new Headers();
+        headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
+        const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
+            method: 'post',
+            body: data,
+            headers: headers
+        });
+        console.log(response);
+        await this.props[STORE_NAME]!.postStore.getPostList();
+        ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);
     };
 
     private onPressImageButton = () => {
-
+        this.setState({
+            modalVisible: true
+        });
     };
+
+    private makeModalInvisible = () => {
+        this.setState({
+            modalVisible: false
+        });
+    };
+
+    private onChangeTextInput = (data: string) => {
+        this.setState({
+            content: data
+        })
+    }
 
     public render(){
         return(
@@ -59,12 +92,21 @@ export default class WritingScreen extends Component<IProps,{}> {
                       <Text style={{color: 'blue', fontSize: 15,opacity: 0.7}}>공유</Text>
                   </TouchableOpacity>
               </View>
-              <IconButton
-                  onPress={this.onPressImageButton}
-                  style={styles.icon}
-                  iconName={'picture-o'}
-                  iconSize={40}
-                  iconColor={'black'}/>
+              <View style={styles.contentView}>
+                  <IconButton
+                      onPress={this.onPressImageButton}
+                      style={styles.icon}
+                      iconName={'picture-o'}
+                      iconSize={40}
+                      iconColor={'black'}
+                  />
+                  <TextInput style={styles.contentTextInput} onChangeText={this.onChangeTextInput}/>
+              </View>
+              <Modal visible={this.state.modalVisible} transparent={true} onRequestClose={this.makeModalInvisible}>
+                  <View style={styles.modalView}>
+                      <Image style={{width: '100%', height: '75%'}} source={{uri: 'data:image/png;base64,' + this.state.base64Data}}/>
+                  </View>
+              </Modal>
           </View>
         );
     }
@@ -90,6 +132,21 @@ const styles = StyleSheet.create({
         fontFamily: 'NanumSquareR',
         fontSize: 22,
     },
+    modalView: {
+        height: '100%',
+        backgroundColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    contentView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 10
+    },
+    contentTextInput: {
+        width: 300,
+        padding: 8
+    }
 });
 
 

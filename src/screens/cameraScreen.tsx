@@ -1,15 +1,14 @@
 'use strict';
 import React from 'react';
 import {Component} from 'react';
-import {View, Text, StyleSheet, CameraRoll, PermissionsAndroid, ToastAndroid} from "react-native";
+import {View, Text, StyleSheet, CameraRoll, PermissionsAndroid} from "react-native";
 import {RNCamera} from "react-native-camera";
 import {IconButton} from "../components/IconButton";
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {inject} from "mobx-react";
-import {ENV_CONSTANTS} from "../constants";
 import {NavigationScreenProp} from "react-navigation";
-import { Base64 } from 'js-base64';
+
 
 interface IProps extends IStoreInjectedProps{
     navigation: NavigationScreenProp<{}>;
@@ -39,9 +38,11 @@ export default class CameraScreen extends Component<IProps,{}> {
     private takePicture = async() => {
         await this.requestDirectoryPermission();
         if (this.camera) {
-            const options = { quality: 0.5, base64: false, fixOrientation: true };
+            const options = { quality: 0.5, base64: true, fixOrientation: true };
             const data = await this.camera.takePictureAsync(options);
-            await CameraRoll.saveToCameraRoll(data.uri);
+            this.props.navigation.navigate('Writing', {
+                data: data.base64
+            })
         }
     };
 
@@ -59,18 +60,6 @@ export default class CameraScreen extends Component<IProps,{}> {
                     this.props.navigation.navigate('Writing',{
                         data: imageArray[image].data
                     });
-                    const data = new FormData();
-                    data.append('photos', imageArray[image].data!);
-                    const headers = new Headers();
-                    // headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
-                    // const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
-                    //     method: 'post',
-                    //     body: data,
-                    //     headers: headers
-                    // });
-                    // console.log(response);
-                    // await this.props[STORE_NAME]!.postStore.getPostList();
-                    // ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);
                 }
             }
         } catch (error) {

@@ -24,10 +24,6 @@ export default class PostListScreen extends Component<IProps> {
         this.props.navigation.navigate('Camera');
     };
 
-    private onPressWritingButton = () => {
-        this.props.navigation.navigate('Writing');
-    };
-
     public render(){
         return(
             <View style={styles.container}>
