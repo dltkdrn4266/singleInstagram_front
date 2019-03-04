@@ -3,6 +3,7 @@ import PostStore from "./postStore";
 import {configure} from "mobx";
 import LoadingStore from "./loadingStore";
 import {ENV_CONSTANTS} from "../constants";
+import CommentStore from "./commentStore";
 
 
 configure({
@@ -13,6 +14,7 @@ export default class RootStore {
     public axiosStore: AxiosInstance;
     public postStore: PostStore
     public loadingStore: LoadingStore;
+    public commentStore: CommentStore
 
     constructor(){
         this.axiosStore = Axios.create({
@@ -20,6 +22,7 @@ export default class RootStore {
         });
         this.postStore = new PostStore(this);
         this.loadingStore = new LoadingStore(this);
+        this.commentStore = new CommentStore(this);
     }
 }
 

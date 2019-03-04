@@ -37,14 +37,6 @@ export default class PostListScreen extends Component<IProps> {
                             iconColor={'black'}/>
                         <Text style={styles.titleText}>Instagram</Text>
                     </View>
-                    {/*<View>*/}
-                        {/*<IconButton*/}
-                            {/*onPress={this.onPressWritingButton}*/}
-                            {/*style={styles.icon}*/}
-                            {/*iconName={'pencil'}*/}
-                            {/*iconSize={25}*/}
-                            {/*iconColor={'black'}/>*/}
-                    {/*</View>*/}
                 </View>
                 {this.props[STORE_NAME]!.loadingStore.isLoading ?
                     <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
@@ -54,7 +46,7 @@ export default class PostListScreen extends Component<IProps> {
                         {
                             this.props[STORE_NAME]!.postStore.postList.length > 0 ?
                                 this.props[STORE_NAME]!.postStore.postList.map(post =>
-                                    <PostItem key={post.id} post={post}/>
+                                    <PostItem key={post.id} navigation={this.props.navigation} post={post}/>
                                 ) :
                                 <View style={styles.noPostView}>
                                     <Text>등록된 포스트가 없습니다.</Text>

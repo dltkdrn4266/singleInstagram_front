@@ -100,7 +100,7 @@ export default class WritingScreen extends Component<IProps,IState> {
                       iconSize={40}
                       iconColor={'black'}
                   />
-                  <TextInput style={styles.contentTextInput} onChangeText={this.onChangeTextInput}/>
+                  <TextInput style={styles.contentTextInput} placeholder={'문구 입력...'} onChangeText={this.onChangeTextInput}/>
               </View>
               <Modal visible={this.state.modalVisible} transparent={true} onRequestClose={this.makeModalInvisible}>
                   <View style={styles.modalView}>
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     contentView: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 10
     },
     contentTextInput: {
         width: 300,

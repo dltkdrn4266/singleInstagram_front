@@ -7,9 +7,11 @@ import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
 import {PostTime} from "./PostTime";
+import {NavigationScreenProp} from "react-navigation";
 
 interface IProps extends IStoreInjectedProps{
     post: IPostSerializer;
+    navigation: NavigationScreenProp<{}>;
 }
 
 @inject(STORE_NAME)
@@ -23,7 +25,9 @@ export default class PostItem extends Component <IProps,{}> {
     };
 
     private onPressCommentButton = () => {
-        console.log('press Comment');
+        this.props.navigation.navigate('Comment', {
+            postNumber: this.props.post.id
+        });
     };
 
     private onPressDeleteButton = () => {

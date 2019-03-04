@@ -15,7 +15,7 @@ export default class postStore {
     @action
     public setPostList = (data: IPostSerializer[]) => {
         this.postList = data;
-    }
+    };
 
     public getPostList = async() => {
         try {
