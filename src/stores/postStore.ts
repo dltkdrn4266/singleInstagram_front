@@ -1,4 +1,4 @@
-import RootStore, {STORE_NAME} from './rootStore';
+import RootStore from './rootStore';
 import {IPostSerializer} from "../models";
 import {action, observable} from "mobx";
 import {ENV_CONSTANTS} from "../constants";

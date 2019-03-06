@@ -1,4 +1,4 @@
-import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createStackNavigator} from 'react-navigation';
 import postListScreen from "./screens/postListScreen";
 import cameraScreen from "./screens/cameraScreen";
 import writingScreen from "./screens/writingScreen";

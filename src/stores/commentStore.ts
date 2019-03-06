@@ -1,12 +1,12 @@
 import RootStore from "./rootStore";
-import {ICommentSerializer, IPostSerializer} from "../models";
+import {ICommentSerializer} from "../models";
 import {ENV_CONSTANTS} from "../constants";
-import {action} from "mobx";
+import {action, observable} from "mobx";
 
 export default class CommentStore {
 
     private rootStore: RootStore;
-    public commentList: ICommentSerializer[];
+    @observable public commentList: ICommentSerializer[];
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -15,6 +15,8 @@ export default class CommentStore {
 
     @action
     public setCommentList = (data: ICommentSerializer[]) => {
+        console.log('data');
+        console.log(data);
         this.commentList = data;
     };
 
@@ -24,9 +26,9 @@ export default class CommentStore {
             const response = await this.rootStore.axiosStore.get<ICommentSerializer[]>('/instagram/comments/', {
                 auth: ENV_CONSTANTS.auth
             });
-            console.log(response.data);
             this.rootStore.commentStore.setCommentList(response.data);
             this.rootStore.loadingStore.endLoading();
+            console.log('end getCommentList');
         } catch (error) {
             console.log(error);
         }

@@ -24,9 +24,20 @@ export default class PostItem extends Component <IProps,{}> {
         console.log('press Heart');
     };
 
-    private onPressCommentButton = () => {
+    private onPressCommentButton = async() => {
+
+        await this.props[STORE_NAME]!.commentStore.getCommentList();
+
+        console.log(this.props[STORE_NAME]!.commentStore.commentList);
+
+        const result = this.props[STORE_NAME]!.commentStore.commentList.filter(comment =>
+            comment.postNumber == this.props.post.id
+        );
+
+
         this.props.navigation.navigate('Comment', {
-            postNumber: this.props.post.id
+            postNumber: this.props.post.id,
+            commentList: result
         });
     };
 
