@@ -6,7 +6,7 @@ import {IPostSerializer} from "../models";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
-import {PostTime} from "./PostTime";
+import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
 
 interface IProps extends IStoreInjectedProps{
@@ -25,15 +25,11 @@ export default class PostItem extends Component <IProps,{}> {
     };
 
     private onPressCommentButton = async() => {
-
         await this.props[STORE_NAME]!.commentStore.getCommentList();
 
-        console.log(this.props[STORE_NAME]!.commentStore.commentList);
-
         const result = this.props[STORE_NAME]!.commentStore.commentList.filter(comment =>
-            comment.postNumber == this.props.post.id
+            comment.post == this.props.post.id
         );
-
 
         this.props.navigation.navigate('Comment', {
             postNumber: this.props.post.id,
@@ -110,7 +106,7 @@ export default class PostItem extends Component <IProps,{}> {
                                 </View>
                             </View>
                     }
-                    <PostTime time={this.props.post.created_at}/>
+                    <CreateTime time={this.props.post.created_at}/>
             </View>
         )
     }

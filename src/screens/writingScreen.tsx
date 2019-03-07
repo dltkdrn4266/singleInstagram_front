@@ -55,6 +55,7 @@ export default class WritingScreen extends Component<IProps,IState> {
         console.log(response);
         await this.props[STORE_NAME]!.postStore.getPostList();
         ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);
+        this.props.navigation.navigate('PostList');
     };
 
     private onPressImageButton = () => {

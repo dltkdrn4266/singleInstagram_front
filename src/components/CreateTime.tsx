@@ -5,7 +5,7 @@ interface IProps {
     time: string;
 }
 
-export class PostTime extends Component<IProps> {
+export class CreateTime extends Component<IProps> {
     private getText = (): string => {
         const postDate = new Date(this.props.time);
         const nowDate = new Date();

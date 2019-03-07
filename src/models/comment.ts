@@ -3,7 +3,7 @@ import {IUserSerializer} from "./user";
 export interface ICommentSerializer {
     id: number;
     user: IUserSerializer;
-    postNumber: number;
+    post: number;
     content: string;
     created_at: string;
 }
