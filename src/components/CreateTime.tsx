@@ -21,7 +21,7 @@ export class CreateTime extends Component<IProps> {
             dateText = `${tempDate.getDate() - 1}일 전`
         } else if((tempDate.getHours() - 9) > 0) {
             dateText = `${tempDate.getHours() - 9}시간 전`
-        } else if(tempDate.getMinutes() == 0) {
+        } else if(tempDate.getMinutes() == 0 || (tempDate.getHours() == 8 && tempDate.getMinutes() == 59)) {
             dateText = '방금 전'
         } else {
             dateText = `${tempDate.getMinutes()}분 전`

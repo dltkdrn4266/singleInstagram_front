@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text, ScrollView, TextInput, Button, ToastAndroid} from "react-native";
+import {View, StyleSheet, Text, ScrollView, TextInput, Button, ToastAndroid, ActivityIndicator} from "react-native";
 import {inject, observer} from "mobx-react";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
@@ -7,6 +7,7 @@ import {ICommentSerializer} from "../models";
 import CommentItem from "../components/CommentItem";
 import {Base64} from "js-base64";
 import {ENV_CONSTANTS} from "../constants";
+import {IconButton} from "../components/IconButton";
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
@@ -44,9 +45,10 @@ export default class CommentScreen extends Component<IProps,IState> {
     };
 
     private onPressPostButton = async() => {
+        this.props[STORE_NAME]!.loadingStore.startLoading();
         const data = new FormData();
-        data.append('Post', this.state.postNumber);
-        data.append('Content', this.state.content);
+        data.append('post', this.state.postNumber);
+        data.append('content', this.state.content);
         const headers = new Headers();
         headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
         const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/comments/', {
@@ -55,7 +57,13 @@ export default class CommentScreen extends Component<IProps,IState> {
             headers: headers
         });
         console.log(response);
+        await this.commentFilter();
+        this.props[STORE_NAME]!.loadingStore.endLoading();
         ToastAndroid.show('댓글이 등록되었습니다',ToastAndroid.BOTTOM);
+
+        this.setState({
+            content: ''
+        })
     };
 
     private commentFilter = async () => {
@@ -65,30 +73,56 @@ export default class CommentScreen extends Component<IProps,IState> {
             comment.post == this.state.postNumber
         );
 
+
+        for (let i = 0; i < result.length; i++){
+            console.log('result' + i);
+            console.log(result[i].id);
+        }
+
+        console.log('commentFilter postNumber');
+        console.log(this.state.postNumber);
+
         this.setState({
             comments: result
         })
     };
 
+    private onPressBackButton = () => {
+        this.props.navigation.goBack();
+    };
+
     public render(){
         return(
             <View style={styles.root}>
-                <ScrollView>
-                    {
-                        this.state.comments.length > 0 ?
-                            this.props[STORE_NAME]!.commentStore.commentList.map(comment =>
-                                <CommentItem key={comment.id} comment={comment}/>
-                            ) :
-                            <View style={styles.noCommentView}>
-                                <Text>등록된 댓글이 없습니다.</Text>
-                            </View>
-                    }
-                </ScrollView>
+                <View style={styles.title}>
+                    <IconButton
+                        onPress={this.onPressBackButton}
+                        style={styles.icon}
+                        iconName={'long-arrow-left'}
+                        iconSize={25}
+                        iconColor={'black'}/>
+                    <Text style={styles.titleText}>댓글</Text>
+                </View>
+                {this.props[STORE_NAME]!.loadingStore.isLoading ?
+                    <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
+                        <ActivityIndicator size={45} color="#0000ff"/>
+                    </View> :
+                    <ScrollView>
+                        {
+                            this.state.comments.length > 0 ?
+                                this.state.comments.map(comment =>
+                                    <CommentItem key={comment.id} comment={comment}/>
+                                ) :
+                                <View style={styles.noCommentView}>
+                                    <Text>등록된 댓글이 없습니다.</Text>
+                                </View>
+                        }
+                    </ScrollView>
+                }
                 <View style={styles.commentWriteView}>
-                    <TextInput style={styles.textInput} placeholder={'댓글 달기'} onChangeText={this.onChangeTextContent}/>
+                    <TextInput value={this.state.content} placeholder={'댓글 달기'} onChangeText={this.onChangeTextContent}/>
                     <Button title={'게시'} onPress={this.onPressPostButton}/>
                 </View>
-
             </View>
         )
     }
@@ -96,16 +130,27 @@ export default class CommentScreen extends Component<IProps,IState> {
 
 const styles = StyleSheet.create({
     root: {
-        height: 760
+        height: 720
+    },
+    icon: {
+        padding: 10
+    },
+    title: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        elevation: 5,
+        borderTopWidth: 0
+    },
+    titleText: {
+        fontFamily: 'NanumSquareR',
+        fontSize: 22,
     },
     noCommentView: {
         height: '80%',
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 10
     },
-    textInput: {
-    },
+
     commentWriteView: {
         height: '20%',
         bottom: 0,
