@@ -14,8 +14,15 @@ interface IProps extends IStoreInjectedProps{
     navigation: NavigationScreenProp<{}>;
 }
 
+
 @inject(STORE_NAME)
 export default class PostItem extends Component <IProps,{}> {
+
+    constructor(props: IProps){
+        super(props);
+    }
+
+
     private onPressProfileButton = () => {
         console.log('press Profile');
     };
