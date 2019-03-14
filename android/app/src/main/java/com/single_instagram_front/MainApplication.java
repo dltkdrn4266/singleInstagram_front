@@ -11,6 +11,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,10 +28,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new PickerPackage(),
+          new PickerPackage(),
           new RNGestureHandlerPackage(),
           new VectorIconsPackage(),
-          new RNCameraPackage()
+          new RNCameraPackage(),
+          new RNFusedLocationPackage()
       );
     }
 

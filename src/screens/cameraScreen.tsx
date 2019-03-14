@@ -14,9 +14,15 @@ interface IProps extends IStoreInjectedProps{
     navigation: NavigationScreenProp<{}>;
 }
 
-@inject(STORE_NAME)
-export default class CameraScreen extends Component<IProps,{}> {
+interface IState {
+    location: string;
+}
 
+@inject(STORE_NAME)
+export default class CameraScreen extends Component<IProps,IState> {
+    public readonly state: IState = {
+        location: ''
+    };
 
     private camera: RNCamera | null;
 
@@ -42,7 +48,22 @@ export default class CameraScreen extends Component<IProps,{}> {
             const data = await this.camera.takePictureAsync(options);
             this.props.navigation.navigate('Writing', {
                 data: data.base64
-            })
+            });
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log(position);
+                    const location = JSON.stringify(position);
+
+                    this.setState({
+                        location: location
+                    })
+                },
+                (error) => {
+                    console.log(error.code, error.message);
+                },
+                {enableHighAccuracy: true, maximumAge: 10000, timeout: 15000}
+            );
         }
     };
 
