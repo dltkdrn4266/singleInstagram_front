@@ -6,6 +6,7 @@ import PostItem from "../components/PostItem";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
 import {inject, observer} from "mobx-react";
+import MapView from 'react-native-daummap';
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
@@ -101,6 +102,15 @@ export default class PostListScreen extends Component<IProps,IState> {
                                 }일`}</Text>
                         </TouchableOpacity>
                     </View>
+                    <MapView
+                        initialRegion={{
+                            latitude: 36.143099,
+                            longitude: 128.392905,
+                            zoomLevel: 1,
+                        }}
+                        mapType={"Standard"}
+                        style={{ width: 300, height: 300 }}
+                    />
                 </View>
                 {this.props[STORE_NAME]!.loadingStore.isLoading ?
                     <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>

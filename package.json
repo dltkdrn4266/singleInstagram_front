@@ -19,6 +19,7 @@
     "react": "16.6.3",
     "react-native": "^0.58.5",
     "react-native-camera": "^1.10.2",
+    "react-native-daummap": "^0.2.8",
     "react-native-gesture-handler": "^1.0.15",
     "react-native-image-crop-picker": "^0.22.0",
     "react-native-image-zoom-viewer": "^2.2.25",

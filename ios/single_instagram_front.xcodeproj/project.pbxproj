@@ -61,6 +61,16 @@
 		5E7C1C45BFA34504B53189BF /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB468E26E09E4EF9B06E8944 /* NanumSquareR.ttf */; };
 		C565753C9C7443128F914F80 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA9D44DC30C4CB1B80B3C12 /* libimageCropPicker.a */; };
 		33F2BE2CA6444EE7AA12D80D /* NanumSquareB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ED36E388784498CBC8A4AAF /* NanumSquareB.ttf */; };
+		132EC04A36474D3CB06D7DDF /* libDaumMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB370F72B204E008DB271A5 /* libDaumMap.a */; };
+		C8620165D0E7497AA9C09F93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CF0924D544536AD75006A /* CoreLocation.framework */; };
+		7A20648952274507BCB80027 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B7DEE9FE6C4B47839E1666 /* OpenGLES.framework */; };
+		C2CCF0E91A8740ABABA60EF1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD933B6824DE4DED8F9F6546 /* QuartzCore.framework */; };
+		EA9A5EBCAD394EEC9982F3F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FFBE08909348419B9DDC9B /* SystemConfiguration.framework */; };
+		C50E1E7DE1674E3486671111 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7281078877894EE5B2DC687E /* libc++.tbd */; };
+		3DC62952B152431A97EFCCC6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D6ACF4BE84458CA2A23295 /* libsqlite3.tbd */; };
+		790907AA7ACA4F55BDD868F0 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACD8B895E1341949042F34B /* libstdc++.6.tbd */; };
+		8424AC3684604F759FA82748 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 199F0EBF2EB04DACA41C7C3B /* libxml2.tbd */; };
+		535DDCFA57A04E96854F3DCB /* NanumSquareEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE8CD637986A424D98487B0A /* NanumSquareEB.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -393,6 +403,17 @@
 		13F30DDABF804C6ABE959AEE /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; name = "imageCropPicker.xcodeproj"; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5DA9D44DC30C4CB1B80B3C12 /* libimageCropPicker.a */ = {isa = PBXFileReference; name = "libimageCropPicker.a"; path = "libimageCropPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8ED36E388784498CBC8A4AAF /* NanumSquareB.ttf */ = {isa = PBXFileReference; name = "NanumSquareB.ttf"; path = "../assets/fonts/NanumSquareB.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C4B5BE8E6D8B417F81375087 /* DaumMap.xcodeproj */ = {isa = PBXFileReference; name = "DaumMap.xcodeproj"; path = "../node_modules/react-native-daummap/ios/DaumMap.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7EB370F72B204E008DB271A5 /* libDaumMap.a */ = {isa = PBXFileReference; name = "libDaumMap.a"; path = "libDaumMap.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		0A0CF0924D544536AD75006A /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		73B7DEE9FE6C4B47839E1666 /* OpenGLES.framework */ = {isa = PBXFileReference; name = "OpenGLES.framework"; path = "System/Library/Frameworks/OpenGLES.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		BD933B6824DE4DED8F9F6546 /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		59FFBE08909348419B9DDC9B /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		7281078877894EE5B2DC687E /* libc++.tbd */ = {isa = PBXFileReference; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		F1D6ACF4BE84458CA2A23295 /* libsqlite3.tbd */ = {isa = PBXFileReference; name = "libsqlite3.tbd"; path = "usr/lib/libsqlite3.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		6ACD8B895E1341949042F34B /* libstdc++.6.tbd */ = {isa = PBXFileReference; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		199F0EBF2EB04DACA41C7C3B /* libxml2.tbd */ = {isa = PBXFileReference; name = "libxml2.tbd"; path = "usr/lib/libxml2.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		AE8CD637986A424D98487B0A /* NanumSquareEB.ttf */ = {isa = PBXFileReference; name = "NanumSquareEB.ttf"; path = "../assets/fonts/NanumSquareEB.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +445,15 @@
 				2EC0026A35C84664957621EC /* libRNVectorIcons.a in Frameworks */,
 				9EB0AB06833E4C62AD1EA0E2 /* libRNGestureHandler.a in Frameworks */,
 				C565753C9C7443128F914F80 /* libimageCropPicker.a in Frameworks */,
+				132EC04A36474D3CB06D7DDF /* libDaumMap.a in Frameworks */,
+				C8620165D0E7497AA9C09F93 /* CoreLocation.framework in Frameworks */,
+				7A20648952274507BCB80027 /* OpenGLES.framework in Frameworks */,
+				C2CCF0E91A8740ABABA60EF1 /* QuartzCore.framework in Frameworks */,
+				EA9A5EBCAD394EEC9982F3F4 /* SystemConfiguration.framework in Frameworks */,
+				C50E1E7DE1674E3486671111 /* libc++.tbd in Frameworks */,
+				3DC62952B152431A97EFCCC6 /* libsqlite3.tbd in Frameworks */,
+				790907AA7ACA4F55BDD868F0 /* libstdc++.6.tbd in Frameworks */,
+				8424AC3684604F759FA82748 /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +607,14 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				0A0CF0924D544536AD75006A /* CoreLocation.framework */,
+				73B7DEE9FE6C4B47839E1666 /* OpenGLES.framework */,
+				BD933B6824DE4DED8F9F6546 /* QuartzCore.framework */,
+				59FFBE08909348419B9DDC9B /* SystemConfiguration.framework */,
+				7281078877894EE5B2DC687E /* libc++.tbd */,
+				F1D6ACF4BE84458CA2A23295 /* libsqlite3.tbd */,
+				6ACD8B895E1341949042F34B /* libstdc++.6.tbd */,
+				199F0EBF2EB04DACA41C7C3B /* libxml2.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -617,6 +655,7 @@
 				864B7FFF32E14B928EC44DFD /* RNVectorIcons.xcodeproj */,
 				52A1516255A84739ACCD5EE2 /* RNGestureHandler.xcodeproj */,
 				13F30DDABF804C6ABE959AEE /* imageCropPicker.xcodeproj */,
+				C4B5BE8E6D8B417F81375087 /* DaumMap.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -686,6 +725,7 @@
 				4156A0FEE53143BFACF6B905 /* THEFACESHOP INKLIPQUID.ttf */,
 				DB468E26E09E4EF9B06E8944 /* NanumSquareR.ttf */,
 				8ED36E388784498CBC8A4AAF /* NanumSquareB.ttf */,
+				AE8CD637986A424D98487B0A /* NanumSquareEB.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1155,6 +1195,7 @@
 				674678C63E054022B1042284 /* THEFACESHOP INKLIPQUID.ttf in Resources */,
 				5E7C1C45BFA34504B53189BF /* NanumSquareR.ttf in Resources */,
 				33F2BE2CA6444EE7AA12D80D /* NanumSquareB.ttf in Resources */,
+				535DDCFA57A04E96854F3DCB /* NanumSquareEB.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,12 +1334,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Debug;
@@ -1324,12 +1367,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Release;
@@ -1355,6 +1400,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Debug;
@@ -1379,6 +1425,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Release;
@@ -1412,12 +1459,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Debug;
@@ -1451,12 +1500,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Release;
@@ -1489,12 +1540,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Debug;
@@ -1527,12 +1580,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-daummap/ios/DaumMap",
 				);
 			};
 			name = Release;

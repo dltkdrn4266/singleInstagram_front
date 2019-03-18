@@ -9,6 +9,7 @@ import {ENV_CONSTANTS} from "../constants";
 import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
 
+
 interface IProps extends IStoreInjectedProps{
     post: IPostSerializer;
     navigation: NavigationScreenProp<{}>;

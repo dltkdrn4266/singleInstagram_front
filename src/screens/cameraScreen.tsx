@@ -15,13 +15,13 @@ interface IProps extends IStoreInjectedProps{
 }
 
 interface IState {
-    location: string;
+    location: Coordinates | null;
 }
 
 @inject(STORE_NAME)
 export default class CameraScreen extends Component<IProps,IState> {
     public readonly state: IState = {
-        location: ''
+        location: null
     };
 
     private camera: RNCamera | null;
@@ -46,17 +46,13 @@ export default class CameraScreen extends Component<IProps,IState> {
         if (this.camera) {
             const options = { quality: 0.5, base64: true, fixOrientation: true };
             const data = await this.camera.takePictureAsync(options);
-            this.props.navigation.navigate('Writing', {
-                data: data.base64
-            });
 
             navigator.geolocation.getCurrentPosition(
-                (position) => {
+                async (position) => {
                     console.log(position);
-                    const location = JSON.stringify(position);
 
-                    this.setState({
-                        location: location
+                    await this.setState({
+                        location: position.coords
                     })
                 },
                 (error) => {
@@ -64,6 +60,11 @@ export default class CameraScreen extends Component<IProps,IState> {
                 },
                 {enableHighAccuracy: true, maximumAge: 10000, timeout: 15000}
             );
+
+            this.props.navigation.navigate('Writing', {
+                data: data.base64,
+                geolocation: this.state.location
+            });
         }
     };
 
