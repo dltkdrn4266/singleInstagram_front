@@ -3,7 +3,6 @@ package com.single_instagram_front;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.teamsf.daummap.DaumMapPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -13,6 +12,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,12 +29,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new DaumMapPackage(),
           new PickerPackage(),
           new RNGestureHandlerPackage(),
           new VectorIconsPackage(),
           new RNCameraPackage(),
-          new RNFusedLocationPackage()
+          new RNFusedLocationPackage(),
+          new MapsPackage()
       );
     }
 

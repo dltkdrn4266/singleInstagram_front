@@ -20,13 +20,15 @@
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
-          <meta-data android:name="com.kakao.sdk.AppKey" android:value="6a879f231c4ead53802564e48c443d7f"/>
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyBtS3_P-6eeQLlDvb-bWQufuNsZ-gXm1pk"/>
     </application>
 
 </manifest>

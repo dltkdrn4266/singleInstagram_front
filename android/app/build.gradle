@@ -135,10 +135,15 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-daummap')
+    implementation(project(':react-native-maps')){
+        exclude group: 'com.google.android.gms'
+    }
+
     implementation(project(':react-native-geolocation-service')) {
         exclude group: 'com.google.android.gms', module: 'play-services-location'
     }
+    implementation 'com.google.android.gms:play-services-base:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-gesture-handler')
