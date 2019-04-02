@@ -63,7 +63,7 @@ export default class CameraScreen extends Component<IProps,IState> {
 
             this.props.navigation.navigate('Writing', {
                 data: data.base64,
-                geolocation: this.state.location
+                location: this.state.location
             });
         }
     };

@@ -6,7 +6,7 @@ import PostItem from "../components/PostItem";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
 import {inject, observer} from "mobx-react";
-import MapView from 'react-native-maps';
+
 
 interface IProps extends IStoreInjectedProps {
     navigation: NavigationScreenProp<{}>;
@@ -104,16 +104,6 @@ export default class PostListScreen extends Component<IProps,IState> {
                     </View>
 
                 </View>
-                <View>
-                    <MapView
-                        initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                        }}
-                    />
-                </View>
                 {this.props[STORE_NAME]!.loadingStore.isLoading ?
                     <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
                         <ActivityIndicator size={45} color="#0000ff" />
@@ -177,4 +167,5 @@ const styles = StyleSheet.create({
     datePickerText: {
         fontFamily: 'NanumSquareR'
     },
+
 });

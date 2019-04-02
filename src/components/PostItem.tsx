@@ -1,6 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, ToastAndroid} from "react-native";
+import {View, StyleSheet, Text, Image, TouchableOpacity, Alert, ToastAndroid, Modal} from "react-native";
 import {IconButton} from "./IconButton";
 import {IPostSerializer} from "../models";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
@@ -8,7 +8,11 @@ import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
 import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
+import MapView from 'react-native-maps';
 
+interface IState {
+    modalVisible: boolean;
+}
 
 interface IProps extends IStoreInjectedProps{
     post: IPostSerializer;
@@ -17,7 +21,11 @@ interface IProps extends IStoreInjectedProps{
 
 
 @inject(STORE_NAME)
-export default class PostItem extends Component <IProps,{}> {
+export default class PostItem extends Component <IProps,IState> {
+
+    public readonly state: IState = {
+        modalVisible: false
+    };
 
     constructor(props: IProps){
         super(props);
@@ -29,7 +37,9 @@ export default class PostItem extends Component <IProps,{}> {
     };
 
     private onPressHeartButton = () => {
-        console.log('press Heart');
+        this.setState({
+            modalVisible: true
+        })
     };
 
     private onPressCommentButton = async() => {
@@ -69,12 +79,28 @@ export default class PostItem extends Component <IProps,{}> {
         }catch (error) {
             console.log(error);
         }
-    }
+    };
 
+    private modalOnRequestClose = () => {
+        this.setState({
+            modalVisible: false
+        });
+    };
 
     public render(){
         return(
             <View style={styles.container}>
+                <Modal visible={this.state.modalVisible} onRequestClose={this.modalOnRequestClose}>
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
+                            latitude: this.props.post.latitude,
+                            longitude: this.props.post.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    />
+                </Modal>
                 <View style={styles.title}>
                     <TouchableOpacity style={styles.profile} onPress={this.onPressProfileButton}></TouchableOpacity>
                     <Text style={styles.textName}>{this.props.post.user.username}</Text>
@@ -176,6 +202,13 @@ const styles = StyleSheet.create({
     },
     contentText: {
         fontSize: 14
-    }
+    },
+    map:{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
 
-})
+    }
+});

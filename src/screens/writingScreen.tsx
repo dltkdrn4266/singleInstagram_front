@@ -4,7 +4,6 @@ import {View, StyleSheet, Text, TouchableOpacity, Modal, Image, TextInput, Toast
 import {IconButton} from "../components/IconButton";
 import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
-import {ImageViewer} from "react-native-image-zoom-viewer";
 import {ENV_CONSTANTS} from "../constants";
 import {inject} from "mobx-react";
 import { Base64 } from 'js-base64';
@@ -17,6 +16,7 @@ interface IState {
     base64Data: string;
     modalVisible: boolean;
     content: string;
+    location: Coordinates | null
 }
 
 @inject(STORE_NAME)
@@ -24,7 +24,8 @@ export default class WritingScreen extends Component<IProps,IState> {
     public readonly state: IState = {
         base64Data: '',
         modalVisible: false,
-        content: ''
+        content: '',
+        location: null
     };
 
     constructor(props: IProps) {
@@ -33,7 +34,8 @@ export default class WritingScreen extends Component<IProps,IState> {
         this.state = {
             base64Data: this.props.navigation.getParam('data'),
             modalVisible: false,
-            content: ''
+            content: '',
+            location: this.props.navigation.getParam('location')
         }
     }
 
