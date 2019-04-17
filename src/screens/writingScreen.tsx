@@ -16,7 +16,8 @@ interface IState {
     base64Data: string;
     modalVisible: boolean;
     content: string;
-    location: Coordinates | null
+    latitude: number;
+    longitude: number;
 }
 
 @inject(STORE_NAME)
@@ -25,7 +26,8 @@ export default class WritingScreen extends Component<IProps,IState> {
         base64Data: '',
         modalVisible: false,
         content: '',
-        location: null
+        latitude: 0,
+        longitude: 0
     };
 
     constructor(props: IProps) {
@@ -35,7 +37,8 @@ export default class WritingScreen extends Component<IProps,IState> {
             base64Data: this.props.navigation.getParam('data'),
             modalVisible: false,
             content: '',
-            location: this.props.navigation.getParam('location')
+            latitude: this.props.navigation.getParam('latitude'),
+            longitude: this.props.navigation.getParam('longitude')
         }
     }
 

@@ -4,8 +4,8 @@ export interface IPostSerializer {
     id: number,
     user: IUserSerializer,
     photos: string,
-    latitude: string,
-    longitude: string,
+    latitude: number,
+    longitude: number,
     like: boolean,
     content: string,
     created_at: string

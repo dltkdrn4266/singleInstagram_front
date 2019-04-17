@@ -8,10 +8,11 @@ import {inject} from "mobx-react";
 import {ENV_CONSTANTS} from "../constants";
 import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
-import MapView from 'react-native-maps';
+import MapView, { Marker, LatLng } from 'react-native-maps';
 
 interface IState {
     modalVisible: boolean;
+    coordinate: LatLng
 }
 
 interface IProps extends IStoreInjectedProps{
@@ -24,7 +25,11 @@ interface IProps extends IStoreInjectedProps{
 export default class PostItem extends Component <IProps,IState> {
 
     public readonly state: IState = {
-        modalVisible: false
+        modalVisible: false,
+        coordinate: {
+            latitude: this.props.post.latitude,
+            longitude: this.props.post.longitude
+        }
     };
 
     constructor(props: IProps){
@@ -96,10 +101,12 @@ export default class PostItem extends Component <IProps,IState> {
                         initialRegion={{
                             latitude: this.props.post.latitude,
                             longitude: this.props.post.longitude,
-                            latitudeDelta: 0.0922,
+                            latitudeDelta: 0.0422,
                             longitudeDelta: 0.0421,
                         }}
-                    />
+                    >
+                    <Marker coordinate={this.state.coordinate}/>
+                    </MapView>
                 </Modal>
                 <View style={styles.title}>
                     <TouchableOpacity style={styles.profile} onPress={this.onPressProfileButton}></TouchableOpacity>
