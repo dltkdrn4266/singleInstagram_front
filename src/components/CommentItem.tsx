@@ -13,7 +13,7 @@ export default class CommentItem extends Component<IProps,{}> {
         return(
             <View style={styles.commentView}>
                 <View style={styles.textView}>
-                    <Text style={styles.textName}>test</Text>
+                    <Text style={styles.textName}>{this.props.comment.user.username}</Text>
                     <Text style={styles.textContent}>{this.props.comment.content}</Text>
                 </View>
                 <CreateTime time={this.props.comment.created_at}/>

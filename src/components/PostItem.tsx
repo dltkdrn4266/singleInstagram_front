@@ -10,9 +10,10 @@ import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
 import MapView, { Marker, LatLng } from 'react-native-maps';
 
+
 interface IState {
     modalVisible: boolean;
-    coordinate: LatLng
+    coordinate: LatLng;
 }
 
 interface IProps extends IStoreInjectedProps{
@@ -28,7 +29,7 @@ export default class PostItem extends Component <IProps,IState> {
         modalVisible: false,
         coordinate: {
             latitude: this.props.post.latitude,
-            longitude: this.props.post.longitude
+            longitude: this.props.post.longitude,
         }
     };
 
@@ -41,7 +42,24 @@ export default class PostItem extends Component <IProps,IState> {
         console.log('press Profile');
     };
 
-    private onPressHeartButton = () => {
+    private onPressHeartButton = async() => {
+        try{
+            const data = new FormData();
+            data.append('like', !this.props.post.like);
+            const headers = new Headers();
+            headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
+            const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/' + this.props.post.id + '/', {
+                method: 'PATCH',
+                body: data,
+                headers: headers
+            });
+            this.props[STORE_NAME]!.postStore.getPostList();
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    private onPressShowMapButton = () => {
         this.setState({
             modalVisible: true
         })
@@ -114,13 +132,22 @@ export default class PostItem extends Component <IProps,IState> {
                 </View>
                 <Image style={{width: '100%', height: 400}} source={{uri: this.props.post.photos}}/>
                 <View style={styles.iconView}>
+                { this.props.post.like ? 
                     <IconButton
                         onPress={this.onPressHeartButton}
                         style={styles.iconHeart}
                         iconName={'heart-o'}
                         iconSize={24}
                         iconColor={'black'}
+                    /> :
+                    <IconButton
+                        onPress={this.onPressHeartButton}
+                        style={styles.iconHeart}
+                        iconName={'heart'}
+                        iconSize={24}
+                        iconColor={'black'}
                     />
+                }
                     <IconButton
                         onPress={this.onPressCommentButton}
                         style={styles.iconComment}
@@ -133,6 +160,13 @@ export default class PostItem extends Component <IProps,IState> {
                         style={styles.iconComment}
                         iconName={'trash-o'}
                         iconSize={25}
+                        iconColor={'black'}
+                    />
+                    <IconButton
+                        onPress={this.onPressShowMapButton}
+                        style={styles.iconHeart}
+                        iconName={'map-marker'}
+                        iconSize={24}
                         iconColor={'black'}
                     />
                 </View>

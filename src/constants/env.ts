@@ -3,5 +3,5 @@ export const ENV_CONSTANTS = {
         username: "sanggulee",
         password: "l5254266"
     },
-    baseURL: 'https://sanggulee.pythonanywhere.com/'
+    baseURL: 'https://sanggulee.pythonanywhere.com'
 };
