@@ -47,16 +47,14 @@ export default class WritingScreen extends Component<IProps,IState> {
     };
 
     private onPressShareButton = async() => {
-        const data = new FormData();
-        data.append('photos', this.state.base64Data);
-        data.append('content', this.state.content);
-        const headers = new Headers();
-        headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
-        const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
-            method: 'post',
-            body: data,
-            headers: headers
-        });
+        const response = await this.props[STORE_NAME]!.axiosStore.post(ENV_CONSTANTS.baseURL + '/instagram/posts/', {
+            photos: this.state.base64Data,
+            content: this.state.content,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude
+        }, {
+            auth: ENV_CONSTANTS.auth
+        })
         console.log(response);
         await this.props[STORE_NAME]!.postStore.getPostList();
         ToastAndroid.show('포스트가 작성되었습니다', ToastAndroid.BOTTOM);

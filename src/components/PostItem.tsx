@@ -10,7 +10,6 @@ import {CreateTime} from "./CreateTime";
 import {NavigationScreenProp} from "react-navigation";
 import MapView, { Marker, LatLng } from 'react-native-maps';
 
-
 interface IState {
     modalVisible: boolean;
     coordinate: LatLng;
@@ -42,18 +41,15 @@ export default class PostItem extends Component <IProps,IState> {
         console.log('press Profile');
     };
 
-    private onPressHeartButton = async() => {
+    private onPresslikeButton = async() => {
         try{
-            const data = new FormData();
-            data.append('like', !this.props.post.like);
-            const headers = new Headers();
-            headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
-            const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/posts/' + this.props.post.id + '/', {
-                method: 'PATCH',
-                body: data,
-                headers: headers
-            });
-            this.props[STORE_NAME]!.postStore.getPostList();
+            const responses = await this.props[STORE_NAME]!.axiosStore.patch(ENV_CONSTANTS.baseURL + '/instagram/posts/' + this.props.post.id + '/', {
+                like: !this.props.post.like
+            }, {
+                auth: ENV_CONSTANTS.auth
+            })
+            console.log('likeButton');
+            console.log(responses);
         } catch (e) {
             console.log(e);
         }
@@ -134,14 +130,14 @@ export default class PostItem extends Component <IProps,IState> {
                 <View style={styles.iconView}>
                 { this.props.post.like ? 
                     <IconButton
-                        onPress={this.onPressHeartButton}
+                        onPress={this.onPresslikeButton}
                         style={styles.iconHeart}
                         iconName={'heart-o'}
                         iconSize={24}
                         iconColor={'black'}
                     /> :
                     <IconButton
-                        onPress={this.onPressHeartButton}
+                        onPress={this.onPresslikeButton}
                         style={styles.iconHeart}
                         iconName={'heart'}
                         iconSize={24}

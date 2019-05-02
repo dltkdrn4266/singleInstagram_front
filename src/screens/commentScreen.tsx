@@ -46,16 +46,13 @@ export default class CommentScreen extends Component<IProps,IState> {
 
     private onPressPostButton = async() => {
         this.props[STORE_NAME]!.loadingStore.startLoading();
-        const data = new FormData();
-        data.append('post', this.state.postNumber);
-        data.append('content', this.state.content);
-        const headers = new Headers();
-        headers.append('Authorization', 'basic ' + Base64.encode("sanggulee:l5254266"));
-        const response = await fetch(ENV_CONSTANTS.baseURL + '/instagram/comments/', {
-            method: 'post',
-            body: data,
-            headers: headers
-        });
+        const response = await this.props[STORE_NAME]!.axiosStore.post(ENV_CONSTANTS.baseURL + '/instagram/comments/', {
+            post: this.state.postNumber,
+            content: this.state.content
+        }, {
+            auth: ENV_CONSTANTS.auth
+        })
+        
         console.log(response);
         await this.commentFilter();
         this.props[STORE_NAME]!.loadingStore.endLoading();
