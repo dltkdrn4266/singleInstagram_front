@@ -43,13 +43,12 @@ export default class PostItem extends Component <IProps,IState> {
 
     private onPresslikeButton = async() => {
         try{
-            const responses = await this.props[STORE_NAME]!.axiosStore.patch(ENV_CONSTANTS.baseURL + '/instagram/posts/' + this.props.post.id + '/', {
+            const response = await this.props[STORE_NAME]!.axiosStore.patch(ENV_CONSTANTS.baseURL + '/instagram/posts/' + this.props.post.id + '/', {
                 like: !this.props.post.like
             }, {
                 auth: ENV_CONSTANTS.auth
             })
-            console.log('likeButton');
-            console.log(responses);
+            this.props[STORE_NAME]!.postStore.likePost(this.props.post, response.data);
         } catch (e) {
             console.log(e);
         }

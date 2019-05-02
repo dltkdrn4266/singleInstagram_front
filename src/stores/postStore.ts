@@ -30,4 +30,10 @@ export default class postStore {
             console.log(error);
         }
     };
+
+    public likePost = (post: IPostSerializer, data: IPostSerializer) =>{
+        const tempPostList = [...this.postList];
+        tempPostList.splice(tempPostList.indexOf(post), 1, data);
+        this.setPostList(tempPostList);
+    }
 }
