@@ -131,17 +131,19 @@ export default class PostItem extends Component <IProps,IState> {
                     <IconButton
                         onPress={this.onPresslikeButton}
                         style={styles.iconHeart}
-                        iconName={'heart-o'}
-                        iconSize={24}
-                        iconColor={'black'}
-                    /> :
-                    <IconButton
-                        onPress={this.onPresslikeButton}
-                        style={styles.iconHeart}
                         iconName={'heart'}
                         iconSize={24}
                         iconColor={'black'}
                     />
+                    :
+                    <IconButton
+                        onPress={this.onPresslikeButton}
+                        style={styles.iconHeart}
+                        iconName={'heart-o'}
+                        iconSize={24}
+                        iconColor={'black'}
+                    />
+                    
                 }
                     <IconButton
                         onPress={this.onPressCommentButton}

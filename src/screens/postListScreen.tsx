@@ -76,6 +76,15 @@ export default class PostListScreen extends Component<IProps,IState> {
 
 
     public render(){
+        let filteredPostList = this.props[STORE_NAME]!.postStore.postList;
+        if(this.state.filterMode) {
+            console.log(this.props[STORE_NAME]!.postStore.postList);
+            const filterDate = `${this.state.year.toString()}-${(this.state.month + 1).toString()}-${this.state.day.toString()}`
+            filteredPostList = filteredPostList.filter(post => post.created_at === filterDate);
+            console.log(filterDate);
+            console.log('filterPostList');
+            console.log(filteredPostList);
+        }
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -110,8 +119,8 @@ export default class PostListScreen extends Component<IProps,IState> {
                     </View> :
                     <ScrollView>
                         {
-                            this.props[STORE_NAME]!.postStore.postList.length > 0 ?
-                                this.props[STORE_NAME]!.postStore.postList.map(post =>
+                            filteredPostList.length > 0 ?
+                                filteredPostList.map(post =>
                                     <PostItem key={post.id} navigation={this.props.navigation} post={post}/>
                                 ) :
                                 <View style={styles.noPostView}>
