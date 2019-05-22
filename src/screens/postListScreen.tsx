@@ -61,6 +61,7 @@ export default class PostListScreen extends Component<IProps,IState> {
                     value.month !== this.state.month ||
                     value.day !== this.state.day
                 ) {
+                    await this.props[STORE_NAME]!.postStore.getPostList();
                     await this.setState({
                         year: value.year as number,
                         month: value.month as number,
@@ -76,14 +77,10 @@ export default class PostListScreen extends Component<IProps,IState> {
 
 
     public render(){
-        let filteredPostList = this.props[STORE_NAME]!.postStore.postList;
+        let filteredPostList = [...this.props[STORE_NAME]!.postStore.postList];
         if(this.state.filterMode) {
-            console.log(this.props[STORE_NAME]!.postStore.postList);
-            const filterDate = `${this.state.year.toString()}-${(this.state.month + 1).toString()}-${this.state.day.toString()}`
+            const filterDate = `${this.state.year.toString()}-0${(this.state.month + 1).toString()}-${this.state.day.toString()}`
             filteredPostList = filteredPostList.filter(post => post.created_at === filterDate);
-            console.log(filterDate);
-            console.log('filterPostList');
-            console.log(filteredPostList);
         }
         return(
             <View style={styles.container}>

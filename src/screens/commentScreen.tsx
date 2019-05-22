@@ -5,7 +5,6 @@ import {IStoreInjectedProps, STORE_NAME} from "../stores/rootStore";
 import {NavigationScreenProp} from "react-navigation";
 import {ICommentSerializer} from "../models";
 import CommentItem from "../components/CommentItem";
-import {Base64} from "js-base64";
 import {ENV_CONSTANTS} from "../constants";
 import {IconButton} from "../components/IconButton";
 
@@ -53,7 +52,6 @@ export default class CommentScreen extends Component<IProps,IState> {
             auth: ENV_CONSTANTS.auth
         })
         
-        console.log(response);
         await this.commentFilter();
         this.props[STORE_NAME]!.loadingStore.endLoading();
         ToastAndroid.show('댓글이 등록되었습니다',ToastAndroid.BOTTOM);
@@ -69,15 +67,6 @@ export default class CommentScreen extends Component<IProps,IState> {
         const result = this.props[STORE_NAME]!.commentStore.commentList.filter(comment =>
             comment.post == this.state.postNumber
         );
-
-
-        for (let i = 0; i < result.length; i++){
-            console.log('result' + i);
-            console.log(result[i].id);
-        }
-
-        console.log('commentFilter postNumber');
-        console.log(this.state.postNumber);
 
         this.setState({
             comments: result

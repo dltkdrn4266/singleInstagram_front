@@ -23,7 +23,6 @@ export default class postStore {
             const response = await this.rootStore.axiosStore.get<IPostSerializer[]>('/instagram/posts/', {
                 auth: ENV_CONSTANTS.auth
             });
-            console.log(response.data);
             this.rootStore.postStore.setPostList(response.data);
             this.rootStore.loadingStore.endLoading();
         } catch (error) {
@@ -37,3 +36,4 @@ export default class postStore {
         this.setPostList(tempPostList);
     }
 }
+
